@@ -44,4 +44,4 @@ $payment = $gateway->purchase(array(
     )
   ));
 ```
-This will return a `Payment` object containing information about your charge.
+This will return a `Charge` object containing information about your charge.

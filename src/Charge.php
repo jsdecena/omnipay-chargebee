@@ -7,14 +7,80 @@ use Omnipay\Common\Message\ResponseInterface;
 
 class Charge implements ResponseInterface
 {
-    public function __construct(Result $parameters)
+    private Result $result;
+
+    /**
+     * @param Result $result
+     */
+    public function __construct(Result $result)
     {
-        dd($parameters);
+        $this->result = $result;
     }
 
+    /**
+     * @return Result
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getSubscription()
+    {
+        return $this->getData();
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getCustomer()
+    {
+        return $this->result->customer();
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getCard()
+    {
+        return $this->result->card();
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getInvoice()
+    {
+        return $this->result->invoice();
+    }
+
+    /**
+     * @return array|mixed|null
+     */
+    public function getInvoices()
+    {
+        return $this->result->invoices();
+    }
+
+    public function getUnbilledCharge()
+    {
+        return $this->result->unbilledCharge();
+    }
+
+    public function getUnbilledCharges()
+    {
+        return $this->result->unbilledCharges();
+    }
+
+    /**
+     * @return Result
+     */
     public function getData()
     {
-        // TODO: Implement getData() method.
+        return $this->result;
     }
 
     public function getRequest()
@@ -22,9 +88,12 @@ class Charge implements ResponseInterface
         // TODO: Implement getRequest() method.
     }
 
-    public function isSuccessful()
+    /**
+     * @return bool
+     */
+    public function isSuccessful(): bool
     {
-        // TODO: Implement isSuccessful() method.
+        return empty($this->result->subscription()) === true;
     }
 
     public function isRedirect()
@@ -44,11 +113,14 @@ class Charge implements ResponseInterface
 
     public function getCode()
     {
-        // TODO: Implement getCode() method.
+        return 200;
     }
 
+    /**
+     * @return mixed|string|null
+     */
     public function getTransactionReference()
     {
-        // TODO: Implement getTransactionReference() method.
+        return $this->result->transaction();
     }
 }

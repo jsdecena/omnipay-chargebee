@@ -3,6 +3,7 @@
 namespace Omnipay\Chargebee;
 
 use ChargeBee\ChargeBee\Environment;
+use ChargeBee\ChargeBee\Models\Item;
 use ChargeBee\ChargeBee\Models\Subscription;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Stripe\AbstractGateway;
@@ -37,7 +38,9 @@ class Gateway extends AbstractGateway implements GatewayInterface
      */
     public function purchase(array $parameters = array())
     {
-        $subscription = Subscription::create($parameters);
+        $subscription = Subscription::createWithItems($parameters['customer']['id'], [
+            "subscriptionItems" => $parameters['subscription_items'],
+        ]);
 
         return new Charge($subscription);
     }
