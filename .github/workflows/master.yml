@@ -1,4 +1,4 @@
-name: PHP Composer
+name: jsdecena/omnipay-chargebee
 
 on:
   push:
