@@ -1,6 +1,6 @@
 # Omnipay - Chargebee
 
-[![jsdecena/omnipay-chargebee](https://github.com/jsdecena/omnipay-chargebee/actions/workflows/master.yml/badge.svg)](https://github.com/jsdecena/omnipay-chargebee/actions/workflows/master.yml)
+[![jsdecena/omnipay-chargebee](https://github.com/jsdecena/omnipay-chargebee/actions/workflows/master.yml/badge.svg?branch=master)](https://github.com/jsdecena/omnipay-chargebee/actions/workflows/master.yml)
 
 A Chargebee driver for [Omnipay](https://omnipay.thephpleague.com/) PHP payment processing library.
 
