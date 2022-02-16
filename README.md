@@ -5,7 +5,7 @@ A Chargebee driver for [Omnipay](https://omnipay.thephpleague.com/) PHP payment 
 ## Installation
 
 ```
-composer require jsdecena/omnipay-chargebee
+composer require league/omnipay:^3 jsdecena/omnipay-chargebee
 ```
 
 ## Usage

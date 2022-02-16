@@ -9,7 +9,7 @@ use ChargeBee\ChargeBee\Models\Subscription;
 use ChargeBee\ChargeBee\Result;
 use Exception;
 use Omnipay\Common\GatewayInterface;
-use Omnipay\Stripe\AbstractGateway;
+use Omnipay\Common\AbstractGateway;
 
 class Gateway extends AbstractGateway implements GatewayInterface
 {
@@ -48,7 +48,7 @@ class Gateway extends AbstractGateway implements GatewayInterface
 
         $toArray = json_decode($customerData->toJson(), true);
         $subscription = Subscription::createWithItems($toArray['customer']['id'], [
-            "subscriptionItems" => $parameters['subscription_items'],
+            'subscriptionItems' => $parameters['subscription_items'],
         ]);
 
         return new Charge($subscription);

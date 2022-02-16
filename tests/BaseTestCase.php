@@ -4,8 +4,9 @@ namespace Omnipay\Chargebee\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Application;
+use Orchestra\Testbench\TestCase;
 
-abstract class TestCase extends \Orchestra\Testbench\TestCase
+abstract class BaseTestCase extends TestCase
 {
     use DatabaseMigrations;
 
@@ -35,6 +36,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return ['Jsdecena\OmnipayChargebee\ChargebeeServiceProvider'];
+//
     }
 }
