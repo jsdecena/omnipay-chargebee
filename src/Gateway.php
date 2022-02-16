@@ -7,6 +7,7 @@ use ChargeBee\ChargeBee\ListResult;
 use ChargeBee\ChargeBee\Models\Customer;
 use ChargeBee\ChargeBee\Models\Subscription;
 use ChargeBee\ChargeBee\Result;
+use Exception;
 use Omnipay\Common\GatewayInterface;
 use Omnipay\Stripe\AbstractGateway;
 
@@ -37,9 +38,12 @@ class Gateway extends AbstractGateway implements GatewayInterface
     /**
      * @param array $parameters
      * @return Charge
+     * @throws Exception
      */
     public function purchase(array $parameters = array()): Charge
     {
+        $this->validateRequiredFields($parameters);
+
         $customerData = Customer::retrieve($parameters['subscriber_id']);
 
         $toArray = json_decode($customerData->toJson(), true);
@@ -56,5 +60,24 @@ class Gateway extends AbstractGateway implements GatewayInterface
     public function customers(): Result|ListResult
     {
         return Customer::all();
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function validateRequiredFields(array $parameters)
+    {
+        $requiredFields = [
+            'subscriber_id',
+            'subscription_items'
+        ];
+
+        foreach ($parameters as $param) {
+            foreach ($requiredFields as $field) {
+                if(!array_key_exists($field, $parameters)) {
+                    throw new Exception("Required field $field is missing in the payload. Please try again.");
+                }
+            }
+        };
     }
 }
