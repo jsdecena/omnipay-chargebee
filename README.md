@@ -24,24 +24,30 @@ $gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR
 ```
 
 **3. Make a transaction**
+
+Payload
 ```php
-$payment = $gateway->purchase(array(
-  "planId" => "no_trial",
-  "autoCollection" => "off",
-  "billingAddress" => array(
-    "firstName" => "John",
-    "lastName" => "Doe",
-    "line1" => "PO Box 9999",
-    "city" => "Walnut",
-    "state" => "California",
-    "zip" => "91789",
-    "country" => "US"
-    ),
-  "customer" => array(
-    "firstName" => "John",
-    "lastName" => "Doe",
-    "email" => "john@user.com"
-    )
-  ));
+$payment = $gateway->purchase([
+    'first_name' => 'John',
+    'last_name' => 'Doe',
+    'email' => 'john@doe.com',
+    'billingAddress' => [
+        'line1' => 'PO Box 9999',
+        'city' => 'Walnut',
+        'state' => 'California',
+        'zip' => '90210',
+        'country' => 'US'
+    ],
+    'subscription_items' => [
+        [
+            'amount' => 100,
+            'billing_cycles' => 1,
+            'free_quantity' => 0,
+            'item_price_id' => 'cbdemo_advanced-USD-monthly',
+            'quantity' => 1,
+            'unit_price' => 100
+        ]
+    ]
+]);
 ```
 This will return a `Charge` object containing information about your charge.
