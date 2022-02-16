@@ -1,5 +1,9 @@
 {
     "name": "jsdecena/omnipay-chargebee",
+    "description": "Omnipay Chargebee package",
+    "keywords": ["chargebee", "package", "php"],
+    "license": "MIT",
+    "type": "package",
     "autoload": {
         "psr-4": {
             "Omnipay\\Chargebee\\":"src/"
