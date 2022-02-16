@@ -45,14 +45,14 @@ This will return a `Charge` object containing information about your subscriptio
 
 # Customers
 
-Retrieve all your customers and get the `id` of your subscriber which will you be using in making the transaction
+Retrieve all your customers and get the `id` of your subscriber which will be used in making the transaction
 
 ```php
 $gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR-API-KEY>']);
 $payment = $gateway->getSubscribers();
 ```
 
-Retrieve your customer with their email and get the `id` of your subscriber which will you be using in making the transaction
+Retrieve your customer with their email and get the `id` of your subscriber which will be used in making the transaction
 
 ```php
 $gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR-API-KEY>']);
