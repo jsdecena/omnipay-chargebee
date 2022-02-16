@@ -28,24 +28,13 @@ $gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR
 Payload
 ```php
 $payment = $gateway->purchase([
-    'first_name' => 'John',
-    'last_name' => 'Doe',
-    'email' => 'john@doe.com',
-    'billing_address' => [
-        'line1' => 'PO Box 9999',
-        'city' => 'Walnut',
-        'state' => 'California',
-        'zip' => '90210',
-        'country' => 'US'
-    ],
+    'subscriber_id' => '16BR23Sxald0PM3m',
     'subscription_items' => [
         [
-            'amount' => 100,
-            'billing_cycles' => 1,
+            'billing_cycles' => 12,
             'free_quantity' => 0,
             'item_price_id' => 'cbdemo_advanced-USD-monthly',
-            'quantity' => 1,
-            'unit_price' => 100
+            'quantity' => 1
         ]
     ]
 ]);

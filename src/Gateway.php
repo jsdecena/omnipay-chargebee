@@ -6,6 +6,7 @@ use ChargeBee\ChargeBee\Environment;
 use ChargeBee\ChargeBee\Models\Customer;
 use ChargeBee\ChargeBee\Models\Subscription;
 use Omnipay\Common\GatewayInterface;
+use Omnipay\Common\Http\Exception;
 use Omnipay\Stripe\AbstractGateway;
 
 class Gateway extends AbstractGateway implements GatewayInterface
@@ -38,20 +39,7 @@ class Gateway extends AbstractGateway implements GatewayInterface
      */
     public function purchase(array $parameters = array())
     {
-        $customerData = Customer::create([
-            "firstName" => $parameters['first_name'],
-            "lastName" => $parameters['last_name'],
-            "email" => $parameters['email'],
-            "billingAddress" => [
-                'firstName' => $parameters['first_name'],
-                'lastName' => $parameters['last_name'],
-                'line1' => $parameters['billing_address']['line1'],
-                'city' => $parameters['billing_address']['city'],
-                'state' => $parameters['billing_address']['state'],
-                'zip' => $parameters['billing_address']['zip'],
-                'country' => $parameters['billing_address']['country']
-            ],
-        ]);
+        $customerData = Customer::retrieve($parameters['subscriber_id']);
 
         $toArray = json_decode($customerData->toJson(), true);
         $subscription = Subscription::createWithItems($toArray['customer']['id'], [
