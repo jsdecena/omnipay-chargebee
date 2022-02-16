@@ -3,10 +3,11 @@
 namespace Omnipay\Chargebee;
 
 use ChargeBee\ChargeBee\Environment;
+use ChargeBee\ChargeBee\ListResult;
 use ChargeBee\ChargeBee\Models\Customer;
 use ChargeBee\ChargeBee\Models\Subscription;
+use ChargeBee\ChargeBee\Result;
 use Omnipay\Common\GatewayInterface;
-use Omnipay\Common\Http\Exception;
 use Omnipay\Stripe\AbstractGateway;
 
 class Gateway extends AbstractGateway implements GatewayInterface
@@ -21,7 +22,7 @@ class Gateway extends AbstractGateway implements GatewayInterface
 
     /**
      * @param array $parameters
-     * @return \Omnipay\Common\Message\RequestInterface|\Omnipay\Stripe\Message\AbstractRequest|void
+     * @return void
      */
     public function authorize(array $parameters = array())
     {
@@ -37,7 +38,7 @@ class Gateway extends AbstractGateway implements GatewayInterface
      * @param array $parameters
      * @return Charge
      */
-    public function purchase(array $parameters = array())
+    public function purchase(array $parameters = array()): Charge
     {
         $customerData = Customer::retrieve($parameters['subscriber_id']);
 
@@ -47,5 +48,13 @@ class Gateway extends AbstractGateway implements GatewayInterface
         ]);
 
         return new Charge($subscription);
+    }
+
+    /**
+     * @return Result|ListResult
+     */
+    public function customers(): Result|ListResult
+    {
+        return Customer::all();
     }
 }

@@ -25,7 +25,8 @@ $gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR
 
 **3. Make a transaction**
 
-Payload
+You need to pass in the `subscriber_id` and the `item_price_id` to make a subscription.
+
 ```php
 $payment = $gateway->purchase([
     'subscriber_id' => '16BR23Sxald0PM3m',
@@ -39,4 +40,14 @@ $payment = $gateway->purchase([
     ]
 ]);
 ```
-This will return a `Charge` object containing information about your charge.
+
+This will return a `Charge` object containing information about your subscription.
+
+# Customers
+
+Retrieve all your customers and find the subscriber ID
+
+```php
+$gateway->authorize(['site_name' => '<YOUR-SITE-NAME>', 'site_api_key' => '<YOUR-API-KEY>']);
+$payment = $gateway->getSubscribers();
+```
